@@ -5,19 +5,24 @@
 {% block body %}
 <main class="w-full">
   <div class="flex justify-center py-32">
-    <form action="{% url 'signin' %}" class="bg-white shadow-md rounded px-16 pt-16 pb-16 mb-4">
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-          Username
-        </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Username" name="username" autofocus autocomplete="off">
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-          Password
-        </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" name="password" autocomplete="off">
-      </div>
+    <form method="post" action="{% url 'signin' %}" class="bg-white shadow-md rounded px-16 pt-16 pb-16 mb-4">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Username" name="username" autofocus autocomplete="off">
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Password</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" name="password" autocomplete="off">
+        </div>
+        <div class="flex items-center">
+            <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">Sign In</button>
+        </div>
+        {% if message %}
+            <div class="flex items-center">
+                <p class="text-gray-700 text-sm font-light mt-2" type="submit">{{ message }}</p>
+            </div>
+        {% endif %}
     </form>
   </div>
 </main>

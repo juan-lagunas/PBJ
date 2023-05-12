@@ -3,7 +3,7 @@ from .models import DarkMode
 
 # Register your models here.
 class DarkAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'mode', 'body', 'nav', 'shadow')
+    list_display = ('id', 'user', 'mode', 'body', 'nav',)
 
 admin.site.register(DarkMode, DarkAdmin)
 
