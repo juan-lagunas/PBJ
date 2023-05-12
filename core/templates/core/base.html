@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body id="dark-body" class="bg-gray-300 text-black">
+    <nav id="dark-nav" class="py-6 px-6 flex justify-between items-center bg-gray-200 shadow-md">
+        <button class="text-xl font-semibold" onclick="darkMode()">PBJ</button>
+        <div class="space-x-6">
+            {% block nav %}
+            {% endblock %}
+        </div>
+    </nav>
+    {% block body %}
+    {% endblock %}
+    <footer class="font-semibold fixed bottom-10 right-10 "><h6>Created By PoopyButtJ</h6></footer>
+    <script>
+        function darkMode(){
+            document.getElementById('dark-body').classList.toggle('bg-zinc-900')
+            document.getElementById('dark-body').classList.toggle('bg-gray-300')
+            document.getElementById('dark-nav').classList.toggle('bg-zinc-700')
+            document.getElementById('dark-nav').classList.toggle('bg-gray-200')
+            document.getElementById('dark-body').classList.toggle('text-black')
+            document.getElementById('dark-body').classList.toggle('text-white')
+        }
+    </script>
+</body>
+</html>
