@@ -1,11 +1,11 @@
 {% extends 'core/base.html' %}
-{% block title %}Sign Up{% endblock %}
+{% block title %}Sign In{% endblock %}
 {% block bodytheme %}{{ theme.body }}{% endblock %}
 {% block navtheme %}{{ theme.nav }} {{ theme.shadow }}{% endblock %}
 {% block body %}
 <main class="w-full">
   <div class="flex justify-center py-32">
-    <form action="/signin" class="bg-white shadow-md rounded px-16 pt-16 pb-16 mb-4">
+    <form action="{% url 'signin' %}" class="bg-white shadow-md rounded px-16 pt-16 pb-16 mb-4">
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
           Username
@@ -14,21 +14,9 @@
       </div>
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-          Email
-        </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="Email" name="email" autocomplete="off">
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
           Password
         </label>
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" name="password" autocomplete="off">
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-          Confirmation
-        </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Confirmation" name="confirmation" autocomplete="off">
       </div>
     </form>
   </div>
