@@ -1,32 +1,32 @@
 {% extends 'core/base.html' %}
 {% block title %}Sign Up{% endblock %}
-{% block bodytheme %}{{ theme.body }}{% endblock %}
-{% block navtheme %}{{ theme.nav }} {{ theme.shadow }}{% endblock %}
+{% block background %}{{ theme.body }}{% endblock %}
+{% block nav %}{{ theme.nav }}{% endblock %}
+{% block hover7 %}{{ theme.hover }}{% endblock %}
+{% block hover8 %}{{ theme.hover }}{% endblock %}
 {% block body %}
-<main class="w-full">
-  <div class="flex justify-center py-32">
-    <form method="post" action="{% url 'signup' %}" class="bg-white shadow-md rounded px-16 pt-16 pb-16 mb-4">
-      {% csrf_token %}
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username</label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Username" name="username" autofocus autocomplete="off">
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Email</label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="Email" name="email" autocomplete="off">
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Password</label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" name="password" autocomplete="off">
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Confirmation</label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Confirmation" name="confirmation" autocomplete="off">
-      </div>
-      <div class="flex items-center justify-between">
-        <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">Sign Up</button>
-      </div>
-    </form>
-  </div>
-</main>
+<div class="flex justify-center pt-60">
+  <form method="post" action="{% url 'signup' %}" class="bg-white shadow-md rounded px-16 pt-16 pb-16 mb-4">
+    {% csrf_token %}
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username</label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Username" name="username" autofocus autocomplete="off">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Email</label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="Email" name="email" autocomplete="off">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Password</label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" name="password" autocomplete="off">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Confirmation</label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Confirmation" name="confirmation" autocomplete="off">
+    </div>
+    <div class="flex items-center justify-between">
+      <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">Sign Up</button>
+    </div>
+  </form>
+</div>
 {% endblock %}

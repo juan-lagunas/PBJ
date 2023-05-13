@@ -10,25 +10,29 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="h-screen {% block bodytheme %}{% endblock %}">
-    <nav class="py-6 px-6 flex justify-between {% block navtheme %}{% endblock %}">
-        <a href="/" class="text-xl font-semibold min-[780px]:ml-3 min-[780px]:mt-2">PBJ</a>
-        <div class="lg:space-x-6">
-            {% if user.is_authenticated %}
-                <a href="/theme?mode=Dark" class="hidden min-[780px]:inline-flex rounded-lg px-3 py-2 font-light hover:bg-slate-100 hover:text-slate-900">Dark Mode</a>
-                <a href="/theme?mode=Light" class="hidden min-[780px]:inline-flex rounded-lg px-3 py-2 font-light hover:bg-slate-100 hover:text-slate-900">Light Mode</a>
-                <a href="/" class="rounded-lg px-3 py-2 font-semibold hover:bg-slate-100 hover:text-slate-900">Inventory</a>
-                <a href="/" class="hidden min-[780px]:inline-flex rounded-lg px-3 py-2 font-semibold hover:bg-slate-100 hover:text-slate-900">Checkout</a>
-                <a href="/" class="hidden min-[780px]:inline-flex rounded-lg px-3 py-2 font-semibold hover:bg-slate-100 hover:text-slate-900">Logs</a>
-                <a href="{% url 'signout' %}" class="rounded-lg px-3 py-2 font-semibold hover:bg-slate-100 hover:text-slate-900">Sign Out</a>
-            {% else %}
-                <a href="{% url 'index' %}" class="rounded-lg px-3 py-2 font-semibold hover:bg-slate-100 hover:text-slate-900" >Login</a>
-                <a href="{% url 'signup' %}" class="rounded-lg px-3 py-2 font-semibold hover:bg-slate-100 hover:text-slate-900">Sign Up</a>
-            {% endif %}
-        </div>
-    </nav>
-    {% block body %}
-    {% endblock %}
-    <footer class="font-semibold fixed right-5 bottom-5"><h6>Created By PoopyButtJ</h6></footer>
+<body class="h-min p-0 m-0 {% block background %}{% endblock %}">
+    <header class="{% block nav %}{% endblock %}">
+        <nav class="py-6 px-6 flex justify-between ">
+            <a href="/" class="text-xl font-semibold min-[780px]:ml-3 min-[780px]:mt-2">PBJ</a>
+            <div class="lg:space-x-6">
+                {% if user.is_authenticated %}
+                    <a href="/theme?mode=Dark" class="hidden min-[780px]:inline-flex rounded-lg px-3 py-2 font-light {% block hover1 %}{% endblock %}">Dark Mode</a>
+                    <a href="/theme?mode=Light" class="hidden min-[780px]:inline-flex rounded-lg px-3 py-2 font-light {% block hover2 %}{% endblock %}">Light Mode</a>
+                    <a href="/" class="rounded-lg px-3 py-2 font-semibold {% block hover3 %}{% endblock %}">Inventory</a>
+                    <a href="/" class="hidden min-[780px]:inline-flex rounded-lg px-3 py-2 font-semibold {% block hover4 %}{% endblock %}">Checkout</a>
+                    <a href="/" class="hidden min-[780px]:inline-flex rounded-lg px-3 py-2 font-semibold {% block hover5 %}{% endblock %}">Logs</a>
+                    <a href="{% url 'signout' %}" class="rounded-lg px-3 py-2 font-semibold {% block hover6 %}{% endblock %}">Sign Out</a>
+                {% else %}
+                    <a href="{% url 'index' %}" class="rounded-lg px-3 py-2 font-semibold {% block hover7 %}{% endblock %}" >Login</a>
+                    <a href="{% url 'signup' %}" class="rounded-lg px-3 py-2 font-semibold {% block hover8 %}{% endblock %}">Sign Up</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+    <main>
+        {% block body %}
+        {% endblock %}
+    </main>
+    <footer class="font-semibold fixed right-10 bottom-10"><h6 class>Created By PoopyButtJ</h6></footer>
 </body>
 </html>

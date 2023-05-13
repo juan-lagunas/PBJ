@@ -26,9 +26,9 @@ def index(request):
 
 def signin(request):
     theme = {
-        'body': 'bg-gray-300',
-        'nav': 'bg-gray-200',
-        'shadow': 'drop-shadow-sm',
+        'body': 'bg-slate-300 text-slate-800',
+        'nav': 'drop-shadow-md bg-slate-200',
+        'hover': 'hover:bg-slate-700 hover:text-slate-200',
     }
     if request.method == 'POST':
         username = request.POST['username'].title()
@@ -59,9 +59,9 @@ def signin(request):
 
 def signup(request):
     theme = {
-        'body': 'bg-gray-300',
-        'nav': 'bg-gray-200',
-        'shadow': 'drop-shadow-sm',
+        'body': 'bg-slate-300 text-slate-800',
+        'nav': 'drop-shadow-md bg-slate-200',
+        'hover': 'hover:bg-slate-700 hover:text-slate-200',
     }
     if request.method == 'POST':
         username = request.POST['username'].title()
@@ -103,9 +103,9 @@ def signup(request):
 
 def signout(request):
     theme = {
-        'body': 'bg-gray-300',
-        'nav': 'bg-gray-200',
-        'shadow': 'drop-shadow-sm',
+        'body': 'bg-slate-300 text-slate-800',
+        'nav': 'drop-shadow-md bg-slate-200',
+        'hover': 'hover:bg-slate-700 hover:text-slate-200',
     }
 
     logout(request)
@@ -121,15 +121,17 @@ def theme(request):
 
     if mode == 'Dark':
         theme = DarkMode.objects.get(user=request.user.username)
-        theme.mode = "Dark"
-        theme.body = "bg-zinc-900 text-white"
-        theme.nav = "bg-zinc-700 drop-shadow-xl"
+        theme.mode = 'Dark'
+        theme.body = 'bg-zinc-900 text-white'
+        theme.nav = 'drop-shadow-md bg-zinc-800'
+        theme.hover = 'hover:bg-gray-200 hover:text-gray-900'
         theme.save()
     elif mode == 'Light':
         theme = DarkMode.objects.get(user=request.user.username)
-        theme.mode = "Light"
-        theme.body = "bg-gray-300 text-slate-700"
-        theme.nav = "bg-gray-200 drop-shadow-sm"
+        theme.mode = 'Light'
+        theme.body = 'bg-slate-300 text-slate-800'
+        theme.nav = 'drop-shadow-md bg-slate-200'
+        theme.hover = 'hover:bg-slate-700 hover:text-slate-200'
         theme.save()
 
     return render(request, 'core/index.html', {

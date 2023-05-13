@@ -1,10 +1,11 @@
 {% extends 'core/base.html' %}
 {% block title %}Sign In{% endblock %}
-{% block bodytheme %}{{ theme.body }}{% endblock %}
-{% block navtheme %}{{ theme.nav }} {{ theme.shadow }}{% endblock %}
+{% block background %}{{ theme.body }}{% endblock %}
+{% block nav %}{{ theme.nav }}{% endblock %}
+{% block hover7 %}{{ theme.hover }}{% endblock %}
+{% block hover8 %}{{ theme.hover }}{% endblock %}
 {% block body %}
-<main class="w-full">
-  <div class="flex justify-center py-32">
+  <div class="flex justify-center pt-60 h-100vh">
     <form method="post" action="{% url 'signin' %}" class="bg-white shadow-md rounded px-16 pt-16 pb-16 mb-4">
         {% csrf_token %}
         <div class="mb-4">
@@ -25,5 +26,4 @@
         {% endif %}
     </form>
   </div>
-</main>
 {% endblock %}
