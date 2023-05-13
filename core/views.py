@@ -1,24 +1,28 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import DarkMode
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+import datetime
 
 
+@login_required
 def index(request):
-    # If no user redirect to sign in page
-    if not request.user.is_authenticated:
-        return redirect('signin')
-    
+    today = datetime.date.today()
     # If user has a theme load theme else create default theme
     try:
         theme = DarkMode.objects.get(user=request.user.username)
         return render(request, 'core/index.html', {
             'theme': theme,
+            'date': today
         })
     except:
         theme = DarkMode.objects.create(user = request.user.username)
         return render(request, 'core/index.html', {
             'theme': theme,
+            'date': today
         })
     # Else display user home page
     
@@ -36,7 +40,7 @@ def signin(request):
 
         # Check that user filled out both username and password
         if not username or not password:
-            return render(request, 'core/signin.html', {
+            return render(request, 'core/login.html', {
                 'message': 'Please fill out both Username and Password.',
                 'theme': theme,
             })
@@ -45,14 +49,14 @@ def signin(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('index')
+            return redirect('/')
         else:
-            return render(request, 'core/signin.html', {
+            return render(request, 'core/login.html', {
                 'message': 'Could not find Username and Password. Try again.',
                 'theme': theme
             })
 
-    return render(request, 'core/signin.html', {
+    return render(request, 'core/login.html', {
         'theme': theme
     })
 
@@ -91,8 +95,8 @@ def signup(request):
         # Create user
         user = User.objects.create_user(username, email, password)
         user.save()
-        return render(request, 'core/signin.html', {
-            'message': 'Successfull signed up.',
+        return render(request, 'core/login.html', {
+            'message': 'Successfully signed up.',
             'theme': theme
         })
 
@@ -109,10 +113,7 @@ def signout(request):
     }
 
     logout(request)
-    return render(request, 'core/signin.html', {
-        'message': 'Sign out successful.',
-        'theme': theme
-    })
+    return redirect('/')
 
 
 def theme(request):
@@ -121,19 +122,23 @@ def theme(request):
 
     if mode == 'Dark':
         theme = DarkMode.objects.get(user=request.user.username)
+        if theme.mode == 'Dark':
+            return redirect('/')
+        
         theme.mode = 'Dark'
         theme.body = 'bg-zinc-900 text-white'
-        theme.nav = 'drop-shadow-md bg-zinc-800'
+        theme.nav = 'drop-shadow-xl bg-zinc-800'
         theme.hover = 'hover:bg-gray-200 hover:text-gray-900'
         theme.save()
     elif mode == 'Light':
         theme = DarkMode.objects.get(user=request.user.username)
+        if theme.mode == 'Light':
+            return redirect('/')
+        
         theme.mode = 'Light'
         theme.body = 'bg-slate-300 text-slate-800'
-        theme.nav = 'drop-shadow-md bg-slate-200'
+        theme.nav = 'drop-shadow-sm bg-slate-200'
         theme.hover = 'hover:bg-slate-700 hover:text-slate-200'
         theme.save()
 
-    return render(request, 'core/index.html', {
-        'theme': theme
-    })
+    return redirect('/')

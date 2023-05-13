@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% block title %}Sign Up{% endblock %}
+{% block title %}Log In{% endblock %}
 {% block background %}{{ theme.body }}{% endblock %}
 {% block nav %}{{ theme.nav }}{% endblock %}
 {% block hover7 %}{{ theme.hover }}{% endblock %}
@@ -7,27 +7,19 @@
 {% block nobody %}
 <div class="flex h-full">
     <div class="m-auto">
-        <form method="post" action="{% url 'core:signup' %}" class="bg-white shadow-md rounded p-16 mb-4">
+        <form method="post" action="{% url 'core:login' %}" class="bg-white shadow-md rounded px-16 pt-16 pb-16 mb-4">
             {% csrf_token %}
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username</label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Username" name="username" autofocus autocomplete="off">
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Email</label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="Email" name="email" autocomplete="off">
-            </div>
-            <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Password</label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" name="password" autocomplete="off">
             </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Confirmation</label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Confirmation" name="confirmation" autocomplete="off">
-            </div>
             <div class="flex">
                 <button class="shadow bg-purple-400 hover:bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded transition ease-in-out" type="submit">Sign Up</button>
-                <a href="{% url 'core:login' %}" class="font-semibold algin-bottom text-zinc-400 hover:text-zinc-500 pt-2.5 pl-2 transition ease-in-out">Already have an account? Sign In</a>
+                <a href="{% url 'core:signup' %}" class="font-semibold algin-bottom text-zinc-400 hover:text-zinc-500 pt-2.5 pl-2 transition ease-in-out">Don't have an account? Login</a>
             </div>
             {% if message %}
             <div class="flex items-center">
