@@ -8,6 +8,7 @@
 {% block hover4 %}{{ theme.hover }}{% endblock %}
 {% block hover5 %}{{ theme.hover }}{% endblock %}
 {% block hover6 %}{{ theme.hover }}{% endblock %}
+{% block hover7 %}{{ theme.hover }}{% endblock %}
 {% block body %}
 <div class="max-sm:w-3/4 mx-auto py-16">
     <div class="text-4xl text-center font-bold py-2">Create new part.</div>
@@ -34,8 +35,8 @@
                 <label for="description" class="block font-bold text-sm mb-2 ">Description</label>
                 <input type="text" placeholder="Small description" autocomplete="off" name="description" class="py-2 px-3 text-gray-700 w-full shadow appearance-none border leading-tight rounded focus:outline-none">
             </div>
-            <div class="w-5/12">
-                <button type="submit" class="bg-purple-400 px-3 py-2 mt-4 w-full rounded text-lg font-bold hover:bg-purple-500 transition ease-in-out ">Submit</button>
+            <div class="flex justify-center">
+                <button type="submit" class="mt-4 w-1/2 shadow bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded transition ease-in-out delay-150">Submit</button>
             </div>
             {% if fail %}
             <div class="block">
@@ -62,9 +63,9 @@
                 <div class="m-auto text-2xl min-[680px]:text-3xl font-semibold p-8">Add inventory.</div>
             </div>
         </a>
-        <a href="{% url 'inventory:index' %}" class="block basis-1/2 h-40 my-8 min-[680px]:my-0 lg:h-60 2xl:h-80 {% if theme.mode == 'Dark' %} bg-zinc-800 hover:bg-zinc-700 drop-shadow-sm {% else %} bg-slate-200 hover:bg-slate-400 drop-shadow-sm {% endif %} rounded-md hover:rounded-lg">
+        <a href="{% url 'inventory:checkout' %}" class="block basis-1/2 h-40 my-8 min-[680px]:my-0 lg:h-60 2xl:h-80 {% if theme.mode == 'Dark' %} bg-zinc-800 hover:bg-zinc-700 drop-shadow-sm {% else %} bg-slate-200 hover:bg-slate-400 drop-shadow-sm {% endif %} rounded-md hover:rounded-lg">
             <div class="flex h-full">
-                <div class="m-auto text-2xl min-[680px]:text-3xl font-semibold p-8">Edit inventory.</div>
+                <div class="m-auto text-2xl min-[680px]:text-3xl font-semibold p-8">Checkout items.</div>
             </div>
         </a>
     </div>

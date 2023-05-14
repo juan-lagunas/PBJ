@@ -8,6 +8,7 @@
 {% block hover4 %}{{ theme.hover }}{% endblock %}
 {% block hover5 %}{{ theme.hover }}{% endblock %}
 {% block hover6 %}{{ theme.hover }}{% endblock %}
+{% block hover7 %}{{ theme.hover }}{% endblock %}
 
 {% block body %}
 <!--BANNER-->
@@ -28,7 +29,7 @@
                 <div class="m-auto text-2xl min-[680px]:text-3xl p-8">Add inventory.</div>
             </div>
         </a>
-        <a href="{% url 'inventory:index' %}" class="block basis-2/3 h-40 my-8 min-[680px]:my-0 lg:h-60 2xl:h-80 {% if theme.mode == 'Dark' %} bg-zinc-800 hover:bg-zinc-700 drop-shadow-sm {% else %} bg-slate-200 hover:bg-slate-400 drop-shadow-sm {% endif %} rounded-md hover:rounded-lg">
+        <a href="{% url 'inventory:checkout' %}" class="block basis-2/3 h-40 my-8 min-[680px]:my-0 lg:h-60 2xl:h-80 {% if theme.mode == 'Dark' %} bg-zinc-800 hover:bg-zinc-700 drop-shadow-sm {% else %} bg-slate-200 hover:bg-slate-400 drop-shadow-sm {% endif %} rounded-md hover:rounded-lg">
             <div class="flex h-full font-semibold hover:font-bold">
                 <div class="m-auto text-2xl min-[680px]:text-3xl p-8">Checkout parts.</div>
             </div>

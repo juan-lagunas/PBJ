@@ -2,8 +2,6 @@
 {% block title %}Log In{% endblock %}
 {% block background %}{{ theme.body }}{% endblock %}
 {% block nav %}{{ theme.nav }}{% endblock %}
-{% block hover7 %}{{ theme.hover }}{% endblock %}
-{% block hover8 %}{{ theme.hover }}{% endblock %}
 {% block nobody %}
 <div class="flex h-full px-6">
     <div class="m-auto">
@@ -18,7 +16,7 @@
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" name="password" autocomplete="off">
             </div>
             <div class="pt-2 mb-4">
-                <button class="block shadow bg-purple-400 hover:bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded transition ease-in-out" type="submit">Sign In</button>
+                <button class="block shadow bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded transition ease-in-out delay-150" type="submit">Sign In</button>
                 <a href="{% url 'core:signup' %}" class="block font-bold text-sm text-zinc-400 hover:text-zinc-500 pt-4 transition ease-in-out">Don't have an account?</a>
             </div>
             {% if fail %}

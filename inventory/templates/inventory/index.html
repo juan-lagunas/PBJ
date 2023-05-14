@@ -8,25 +8,26 @@
 {% block hover4 %}{{ theme.hover }}{% endblock %}
 {% block hover5 %}{{ theme.hover }}{% endblock %}
 {% block hover6 %}{{ theme.hover }}{% endblock %}
+{% block hover7 %}{{ theme.hover }}{% endblock %}
 {% block body %}
 <div class="container mx-auto">
     <div class="py-40 text-7xl font-bold text-center">
         Browse through recent inventory.
     </div>
 </div>
-<div class="container mx-auto py-4">
+<div class="w-10/12 mx-auto block sm:container py-4">
     <div class="sm:flex sm:justify-between sm:space-x-2 md:space-x-3">
-        <a href="{% url 'inventory:add' %}" class="block py-20 text-3xl text-center sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
+        <a href="{% url 'inventory:add' %}" class="block py-20 text-3xl text-center sm:text-base m-auto mt-6 sm:p-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
             Add
         </a>
-        <a href="{% url 'inventory:create' %}" class="block py-20 text-3xl text-center sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
+        <a href="{% url 'inventory:create' %}" class="block py-20 text-3xl text-center sm:text-base m-auto mt-6 sm:p-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
             Create
         </a>
-        <a href="{% url 'inventory:logs' %}" class="block py-20 text-3xl text-center sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
-            Logs
-        </a>
-        <a href="#" class="block py-20 text-3xl text-center sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
+        <a href="/" class="block py-20 text-3xl text-center sm:text-base m-auto mt-6 sm:p-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
             Edit
+        </a>
+        <a href="{% url 'inventory:logs' %}" class="block py-20 text-3xl text-center sm:text-base m-auto mt-6 mb-10 sm:mb-0 sm:p-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
+            Logs
         </a>
     </div>
 </div>

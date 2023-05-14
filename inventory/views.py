@@ -164,3 +164,10 @@ def logs(request):
         'theme': theme,
         'logs': logs,
 })
+
+@login_required
+def checkout(request):
+    theme = DarkMode.objects.filter(user=request.user.username)[0]
+    return render(request, 'inventory/checkout.html', {
+        'theme': theme
+    })
