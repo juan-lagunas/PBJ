@@ -31,8 +31,9 @@ def index(request):
 def signin(request):
     theme = {
         'body': 'bg-slate-300 text-slate-800',
-        'nav': 'drop-shadow-md bg-slate-200',
+        'nav': 'drop-shadow-sm bg-slate-200',
         'hover': 'hover:bg-slate-700 hover:text-slate-200',
+        'mode': 'Light'
     }
     if request.method == 'POST':
         username = request.POST['username'].title()
@@ -64,8 +65,9 @@ def signin(request):
 def signup(request):
     theme = {
         'body': 'bg-slate-300 text-slate-800',
-        'nav': 'drop-shadow-md bg-slate-200',
+        'nav': 'drop-shadow-sm bg-slate-200',
         'hover': 'hover:bg-slate-700 hover:text-slate-200',
+        'mode': 'Light'
     }
     if request.method == 'POST':
         username = request.POST['username'].title()
@@ -106,12 +108,6 @@ def signup(request):
 
 
 def signout(request):
-    theme = {
-        'body': 'bg-slate-300 text-slate-800',
-        'nav': 'drop-shadow-md bg-slate-200',
-        'hover': 'hover:bg-slate-700 hover:text-slate-200',
-    }
-
     logout(request)
     return redirect('/')
 

@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 class Category(models.Model):
     category = models.CharField(max_length=64)
     
@@ -35,9 +33,9 @@ class Inventory(models.Model):
         return f'{self.price:,.2f}'
 
     def __self__(self):
-        return f'{self.partname} ({self.category}) - Qty: {self.quantity} Price: ${self.price} Total: %{self.total}'
+        return f'{self.partname} ({self.category}) - Qty: {self.quantity} Price: ${self.usd} Total: %{self.total}'
     
-class Logs(models.Model):
+class Log(models.Model):
     partname = models.CharField(max_length=100)
     category = models.CharField(max_length=64)
     price = models.FloatField()
@@ -46,9 +44,9 @@ class Logs(models.Model):
     date = models.DateTimeField()
 
     @property
-    def usd(self):
+    def total(self):
         value = self.price * self.quantity
         return f'{value:,.2f}'
     
     def __self__(self):
-        return f'{self.partname} ({self.category}) - Qty: {self.quantity} Price: ${self.price} User: {self.user} Date: {self.date}'
+        return f'{self.partname} ({self.category}) - Qty: {self.quantity} Total: ${self.total} User: {self.user} Date: {self.date}'

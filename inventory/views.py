@@ -13,6 +13,17 @@ def index(request):
 
 
 @login_required
+def create(request):
+    if request.method == 'POST':
+        pass
+
+    theme = DarkMode.objects.get(user=request.user.username)
+    return render(request, 'inventory/create.html', {
+        'theme': theme
+    })
+
+
+@login_required
 def add(request):
     if request.method == 'POST':
         pass

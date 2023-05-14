@@ -11,18 +11,18 @@
 {% block body %}
 <div class="w-3/4 mx-auto pt-6 sm:pt-16 pb-4">
     <div class="sm:flex sm:justify-between sm:space-x-2 md:space-x-3">
-        <button class="py-20 text-3xl sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-300 {% else %} bg-zinc-700 hover:bg-zinc-600 {% endif %}">
-            Add Part
-        </button>
-        <button class="py-20 text-3xl sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-300 {% else %} bg-zinc-700 hover:bg-zinc-600 {% endif %}">
-            Add Category
-        </button>
-        <button class="py-20 text-3xl sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-300 {% else %} bg-zinc-700 hover:bg-zinc-600 {% endif %}">
+        <a href="{% url 'inventory:create' %}" class="block py-20 text-3xl text-center sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-200 hover:bg-slate-400 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
+            Create Part
+        </a>
+        <a href="#" class="block py-20 text-3xl text-center sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-200 hover:bg-slate-400 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
+            Create Category
+        </a>
+        <a href="{% url 'inventory:add' %}" class="block py-20 text-3xl text-center sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-200 hover:bg-slate-400 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
+            Add Inventory
+        </a>
+        <a href="#" class="block py-20 text-3xl text-center sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-200 hover:bg-slate-400 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
             Edit
-        </button>
-        <button class="py-20 text-3xl sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-300 {% else %} bg-zinc-700 hover:bg-zinc-600 {% endif %}">
-            Search
-        </button>
+        </a>
     </div>
 </div>
 <section class="hidden sm:block w-3/4 mx-auto box-border">

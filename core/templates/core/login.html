@@ -5,7 +5,7 @@
 {% block hover7 %}{{ theme.hover }}{% endblock %}
 {% block hover8 %}{{ theme.hover }}{% endblock %}
 {% block nobody %}
-<div class="flex h-full">
+<div class="flex h-full px-6">
     <div class="m-auto">
         <form method="post" action="{% url 'core:login' %}" class="bg-white shadow-md rounded px-16 pt-16 pb-16 mb-4">
             {% csrf_token %}
@@ -17,13 +17,13 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Password</label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" name="password" autocomplete="off">
             </div>
-            <div class="flex">
-                <button class="shadow bg-purple-400 hover:bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded transition ease-in-out" type="submit">Sign Up</button>
-                <a href="{% url 'core:signup' %}" class="font-semibold algin-bottom text-zinc-400 hover:text-zinc-500 pt-2.5 pl-2 transition ease-in-out">Don't have an account? Login</a>
+            <div class="pt-2 mb-4">
+                <button class="block shadow bg-purple-400 hover:bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded transition ease-in-out" type="submit">Sign In</button>
+                <a href="{% url 'core:signup' %}" class="block font-bold text-sm text-zinc-400 hover:text-zinc-500 pt-4 transition ease-in-out">Don't have an account?</a>
             </div>
             {% if message %}
-            <div class="flex items-center">
-                <p class="text-gray-700 text-sm font-light mt-2" type="submit">{{ message }}</p>
+            <div class="block">
+                <p class="text-red-400 text-sm font-bold mt-2" type="submit">{{ message }}</p>
             </div>
             {% endif %}
         </form>
