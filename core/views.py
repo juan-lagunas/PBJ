@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import DarkMode
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 import datetime
 
 
@@ -42,8 +42,8 @@ def signin(request):
         # Check that user filled out both username and password
         if not username or not password:
             return render(request, 'core/login.html', {
-                'message': 'Please fill out both Username and Password.',
-                'theme': theme,
+                'fail': 'Please fill out both Username and Password.',
+                'theme': theme
             })
         
         # Check if user in database
@@ -53,7 +53,7 @@ def signin(request):
             return redirect('/')
         else:
             return render(request, 'core/login.html', {
-                'message': 'Could not find Username and Password. Try again.',
+                'fail': 'Could not find Username and Password. Try again.',
                 'theme': theme
             })
 
@@ -78,19 +78,19 @@ def signup(request):
         # Check that user filled out form correctly and username available
         if not username or not email or not password or not confirmation:
             return render(request, 'core/signup.html', {
-                'message': 'Please fill out all fields.',
+                'fail': 'Please fill out everything.',
                 'theme': theme
             })
         
         if password != confirmation:
             return render(request, 'core/signup.html', {
-                'message': 'Passwords do not match.',
+                'fail': 'Passwords do not match.',
                 'theme': theme
             })
         
         if User.objects.filter(username=username).exists():
             return render(request, 'core/signup.html', {
-                'message': 'Username already taken.',
+                'fail': 'Username already taken',
                 'theme': theme
             })
         
@@ -98,9 +98,9 @@ def signup(request):
         user = User.objects.create_user(username, email, password)
         user.save()
         return render(request, 'core/login.html', {
-            'message': 'Successfully signed up.',
-            'theme': theme
-        })
+                'success': 'Successfully signed up',
+                'theme': theme
+            })
 
     return render(request, 'core/signup.html', {
         'theme': theme
@@ -116,21 +116,19 @@ def theme(request):
     # Get the mode user has selected and change colors accordingly
     mode = request.GET.get('mode')
 
-    if mode == 'Dark':
+    try:
         theme = DarkMode.objects.get(user=request.user.username)
-        if theme.mode == 'Dark':
-            return redirect('/')
-        
+    except:
+        theme = DarkMode.objects.filter(user=request.user.username)[0]
+
+    if mode == 'Dark':
         theme.mode = 'Dark'
         theme.body = 'bg-zinc-900 text-white'
         theme.nav = 'drop-shadow-xl bg-zinc-800'
         theme.hover = 'hover:bg-gray-200 hover:text-gray-900'
         theme.save()
+
     elif mode == 'Light':
-        theme = DarkMode.objects.get(user=request.user.username)
-        if theme.mode == 'Light':
-            return redirect('/')
-        
         theme.mode = 'Light'
         theme.body = 'bg-slate-300 text-slate-800'
         theme.nav = 'drop-shadow-sm bg-slate-200'

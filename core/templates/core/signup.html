@@ -29,9 +29,13 @@
                 <button class="block shadow bg-purple-400 hover:bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded transition ease-in-out" type="submit">Sign Up</button>
                 <a href="{% url 'core:login' %}" class="block font-bold text-sm text-zinc-400 hover:text-zinc-500 pt-4 transition ease-in-out">Already have an account?</a>
             </div>
-            {% if message %}
+            {% if fail %}
             <div class="block">
-                <p class="text-red-400 text-sm font-bold mt-2" type="submit">{{ message }}</p>
+                <p class="text-rose-600 text-sm font-bold mt-4" type="submit">{{ fail }}</p>
+            </div>
+            {% elif success %}
+            <div class="block">
+                <p class="text-emerald-500 text-sm font-bold mt-4" type="submit">{{ success }}</p>
             </div>
             {% endif %}
         </form>

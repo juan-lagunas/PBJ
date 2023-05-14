@@ -9,136 +9,62 @@
 {% block hover5 %}{{ theme.hover }}{% endblock %}
 {% block hover6 %}{{ theme.hover }}{% endblock %}
 {% block body %}
-<div class="w-3/4 mx-auto pt-6 sm:pt-16 pb-4">
+<div class="container mx-auto">
+    <div class="py-40 text-7xl font-bold text-center">
+        Browse through recent inventory.
+    </div>
+</div>
+<div class="container mx-auto py-4">
     <div class="sm:flex sm:justify-between sm:space-x-2 md:space-x-3">
-        <a href="{% url 'inventory:create' %}" class="block py-20 text-3xl text-center sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-200 hover:bg-slate-400 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
-            Create Part
+        <a href="{% url 'inventory:add' %}" class="block py-20 text-3xl text-center sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
+            Add
         </a>
-        <a href="#" class="block py-20 text-3xl text-center sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-200 hover:bg-slate-400 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
-            Create Category
+        <a href="{% url 'inventory:create' %}" class="block py-20 text-3xl text-center sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
+            Create
         </a>
-        <a href="{% url 'inventory:add' %}" class="block py-20 text-3xl text-center sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-200 hover:bg-slate-400 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
-            Add Inventory
+        <a href="{% url 'inventory:logs' %}" class="block py-20 text-3xl text-center sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
+            Logs
         </a>
-        <a href="#" class="block py-20 text-3xl text-center sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-200 hover:bg-slate-400 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
+        <a href="#" class="block py-20 text-3xl text-center sm:text-base m-auto sm:p-4 mt-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
             Edit
         </a>
     </div>
 </div>
-<section class="hidden sm:block w-3/4 mx-auto box-border">
+<section class="container mx-auto">
     <div class="{% if theme.mode == 'Light' %} bg-slate-200 {% else %} bg-zinc-800 {% endif %} rounded-lg">
         <div class="relative shadow-md">
             <div class="overflow-x-auto rounded-lg">
                 <table class="w-full text-sm text-left">
                     <thead class="text-xs uppercase m-auto {% if theme.mode == 'Light' %} bg-slate-400 {% else %} bg-zinc-700 {% endif %} ">
-                        <tr class="{% if theme.mode == 'Light' %} border-b border-slate-400 {% else %} border-b border-zinc-600 {% endif %}">
-                            <th scope="col" class="px-4 py-3">Product name</th>
-                            <th scope="col" class="px-4 py-3">Category</th>
-                            <th scope="col" class="px-4 py-3">Manufacturer</th>
-                            <th scope="col" class="px-4 py-3">Description</th>
-                            <th scope="col" class="px-4 py-3">Price</th>
-                            <th scope="col" class="px-4 py-3"><span class="sr-only">Actions</span></th>
+                        <tr class="">
+                            <th scope="col" class="px-6 py-3 text-center">Product name</th>
+                            <th scope="col" class="px-6 py-3 text-center">Category</th>
+                            <th scope="col" class="px-6 py-3 text-center">Quantity</th>
+                            <th scope="col" class="px-6 py-3 text-center">Price</th>
+                            <th scope="col" class="px-6 py-3 text-center">Total</th>
+                            <th scope="col" class="px-6 py-3 text-center"><span class="sr-only">Actions</span></th>
                         </tr>
                     </thead>
-
                     <tbody>
-                        <tr class="{% if theme.mode == 'Light' %} border-b border-slate-400 {% else %} border-b border-zinc-600 {% endif %}">
-                            <th scope="col" class="px-4 py-3">Product name</th>
-                            <th scope="col" class="px-4 py-3">Category</th>
-                            <th scope="col" class="px-4 py-3">Manufacturer</th>
-                            <th scope="col" class="px-4 py-3">Description</th>
-                            <th scope="col" class="px-4 py-3">Price</th>
-                            <th scope="col" class="px-4 py-3"><span class="sr-only">Actions</span></th>
+                        {% for part in inventory %}
+                        <tr class="">
+                            <th scope="col" class="px-6 py-3 text-center">{{ part.partname }}</th>
+                            <th scope="col" class="px-6 py-3 text-center">{{ part.category }}</th>
+                            <th scope="col" class="px-6 py-3 text-center">{{ part.quantity }}</th>
+                            <th scope="col" class="px-6 py-3 text-center">{{ part.usd }}</th>
+                            <th scope="col" class="px-6 py-3 text-center">{{ part.total }}</th>
+                            <th scope="col" class="px-6 py-3 text-center"><span class="sr-only">Actions</span></th>
                         </tr>
-                        <tr class="{% if theme.mode == 'Light' %} border-b border-slate-400 {% else %} border-b border-zinc-600 {% endif %}">
-                            <th scope="col" class="px-4 py-3">Product name</th>
-                            <th scope="col" class="px-4 py-3">Category</th>
-                            <th scope="col" class="px-4 py-3">Manufacturer</th>
-                            <th scope="col" class="px-4 py-3">Description</th>
-                            <th scope="col" class="px-4 py-3">Price</th>
-                            <th scope="col" class="px-4 py-3"><span class="sr-only">Actions</span></th>
+                        {% endfor %}
+                    <tfoot class="">
+                        <tr class="">
+                            <th scope="col" class="px-6 py-3 text-center">SUM:</th>
+                            <th scope="col" class="px-6 py-3 text-center"></th>
+                            <th scope="col" class="px-6 py-3 text-center"></th>
+                            <th scope="col" class="px-6 py-3 text-center"></th>
+                            <th scope="col" class="px-6 py-3 text-center">{{ total }}</th>
                         </tr>
-                        <tr class="{% if theme.mode == 'Light' %} border-b border-slate-400 {% else %} border-b border-zinc-600 {% endif %}">
-                            <th scope="col" class="px-4 py-3">Product name</th>
-                            <th scope="col" class="px-4 py-3">Category</th>
-                            <th scope="col" class="px-4 py-3">Manufacturer</th>
-                            <th scope="col" class="px-4 py-3">Description</th>
-                            <th scope="col" class="px-4 py-3">Price</th>
-                            <th scope="col" class="px-4 py-3"><span class="sr-only">Actions</span></th>
-                        </tr>
-                        <tr class="{% if theme.mode == 'Light' %} border-b border-slate-400 {% else %} border-b border-zinc-600 {% endif %}">
-                            <th scope="col" class="px-4 py-3">Product name</th>
-                            <th scope="col" class="px-4 py-3">Category</th>
-                            <th scope="col" class="px-4 py-3">Manufacturer</th>
-                            <th scope="col" class="px-4 py-3">Description</th>
-                            <th scope="col" class="px-4 py-3">Price</th>
-                            <th scope="col" class="px-4 py-3"><span class="sr-only">Actions</span></th>
-                        </tr>
-                        <tr class="{% if theme.mode == 'Light' %} border-b border-slate-400 {% else %} border-b border-zinc-600 {% endif %}">
-                            <th scope="col" class="px-4 py-3">Product name</th>
-                            <th scope="col" class="px-4 py-3">Category</th>
-                            <th scope="col" class="px-4 py-3">Manufacturer</th>
-                            <th scope="col" class="px-4 py-3">Description</th>
-                            <th scope="col" class="px-4 py-3">Price</th>
-                            <th scope="col" class="px-4 py-3"><span class="sr-only">Actions</span></th>
-                        </tr>
-                        <tr class="{% if theme.mode == 'Light' %} border-b border-slate-400 {% else %} border-b border-zinc-600 {% endif %}">
-                            <th scope="col" class="px-4 py-3">Product name</th>
-                            <th scope="col" class="px-4 py-3">Category</th>
-                            <th scope="col" class="px-4 py-3">Manufacturer</th>
-                            <th scope="col" class="px-4 py-3">Description</th>
-                            <th scope="col" class="px-4 py-3">Price</th>
-                            <th scope="col" class="px-4 py-3"><span class="sr-only">Actions</span></th>
-                        </tr>
-                        <tr class="{% if theme.mode == 'Light' %} border-b border-slate-400 {% else %} border-b border-zinc-600 {% endif %}">
-                            <th scope="col" class="px-4 py-3">Product name</th>
-                            <th scope="col" class="px-4 py-3">Category</th>
-                            <th scope="col" class="px-4 py-3">Manufacturer</th>
-                            <th scope="col" class="px-4 py-3">Description</th>
-                            <th scope="col" class="px-4 py-3">Price</th>
-                            <th scope="col" class="px-4 py-3"><span class="sr-only">Actions</span></th>
-                        </tr>
-                        <tr class="{% if theme.mode == 'Light' %} border-b border-slate-400 {% else %} border-b border-zinc-600 {% endif %}">
-                            <th scope="col" class="px-4 py-3">Product name</th>
-                            <th scope="col" class="px-4 py-3">Category</th>
-                            <th scope="col" class="px-4 py-3">Manufacturer</th>
-                            <th scope="col" class="px-4 py-3">Description</th>
-                            <th scope="col" class="px-4 py-3">Price</th>
-                            <th scope="col" class="px-4 py-3"><span class="sr-only">Actions</span></th>
-                        </tr>
-                        <tr class="{% if theme.mode == 'Light' %} border-b border-slate-400 {% else %} border-b border-zinc-600 {% endif %}">
-                            <th scope="col" class="px-4 py-3">Product name</th>
-                            <th scope="col" class="px-4 py-3">Category</th>
-                            <th scope="col" class="px-4 py-3">Manufacturer</th>
-                            <th scope="col" class="px-4 py-3">Description</th>
-                            <th scope="col" class="px-4 py-3">Price</th>
-                            <th scope="col" class="px-4 py-3"><span class="sr-only">Actions</span></th>
-                        </tr>
-                        <tr class="{% if theme.mode == 'Light' %} border-b border-slate-400 {% else %} border-b border-zinc-600 {% endif %}">
-                            <th scope="col" class="px-4 py-3">Product name</th>
-                            <th scope="col" class="px-4 py-3">Category</th>
-                            <th scope="col" class="px-4 py-3">Manufacturer</th>
-                            <th scope="col" class="px-4 py-3">Description</th>
-                            <th scope="col" class="px-4 py-3">Price</th>
-                            <th scope="col" class="px-4 py-3"><span class="sr-only">Actions</span></th>
-                        </tr>
-                        <tr class="{% if theme.mode == 'Light' %} border-b border-slate-400 {% else %} border-b border-zinc-600 {% endif %}">
-                            <th scope="col" class="px-4 py-3">Product name</th>
-                            <th scope="col" class="px-4 py-3">Category</th>
-                            <th scope="col" class="px-4 py-3">Manufacturer</th>
-                            <th scope="col" class="px-4 py-3">Description</th>
-                            <th scope="col" class="px-4 py-3">Price</th>
-                            <th scope="col" class="px-4 py-3"><span class="sr-only">Actions</span></th>
-                        </tr>
-                        <tr class="{% if theme.mode == 'Light' %} border-b border-slate-400 {% else %} border-b border-zinc-600 {% endif %}">
-                            <th scope="col" class="px-4 py-3">Product name</th>
-                            <th scope="col" class="px-4 py-3">Category</th>
-                            <th scope="col" class="px-4 py-3">Manufacturer</th>
-                            <th scope="col" class="px-4 py-3">Description</th>
-                            <th scope="col" class="px-4 py-3">Price</th>
-                            <th scope="col" class="px-4 py-3"><span class="sr-only">Actions</span></th>
-                        </tr>
-                    </tbody>
+                    </tfoot>
                 </table>
             </div>
         </div>

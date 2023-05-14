@@ -21,7 +21,7 @@
                 <div class="lg:space-x-6 flex justify-end min-[880px]:justify-center">
                     <a href="{% url 'inventory:index' %}" class="rounded-lg px-3 py-2 font-semibold {% block hover3 %}{% endblock %} transition ease-in-out">Inventory</a>
                     <a href="/" class="hidden min-[780px]:inline-flex rounded-lg px-3 py-2 font-semibold {% block hover4 %}{% endblock %} transition ease-in-out">Checkout</a>
-                    <a href="/" class="hidden min-[780px]:inline-flex rounded-lg px-3 py-2 font-semibold {% block hover5 %}{% endblock %} transition ease-in-out">Logs</a>
+                    <a href="{% url 'inventory:logs' %}" class="hidden min-[780px]:inline-flex rounded-lg px-3 py-2 font-semibold {% block hover5 %}{% endblock %} transition ease-in-out">Logs</a>
                     <a href="{% url 'core:signout' %}" class="rounded-lg px-3 py-2 font-semibold {% block hover6 %}{% endblock %} transition ease-in-out">Sign Out</a>
                 </div>
             </div>
@@ -50,9 +50,9 @@
     {% endif %}
 
     {% if user.is_authenticated %}
-    <footer class="py-8 text-base leading-10 w-full">
-        <div class="mx-10">
-            <div class="font-semibold text-end">Created By PoopyButtJ</div>
+    <footer class="p-16 text-base leading-10 w-full">
+        <div class="flex justify-end ">
+            <a href="{% url 'core:index' %}" class="font-bold text-base">Created By PoopyButtJ</a>
         </div>
     </footer>
     {% else %}
