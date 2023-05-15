@@ -20,7 +20,6 @@
     <p class="text-lg w-full font-semibold text-right">{{ date }}</p>
 </div>
 
-
 <!--SECTION-->
 <div class="w-10/12 2xl:w-4/6 mx-auto pt-12 min-[680px]:py-4">
     <div class="block w-full min-[680px]:flex min-[680px]:flex-row min-[680px]:space-x-6 2xl:space-x-14">
@@ -31,7 +30,7 @@
         </a>
         <a href="{% url 'inventory:checkout' %}" class="block basis-2/3 h-40 my-8 min-[680px]:my-0 lg:h-60 2xl:h-80 {% if theme.mode == 'Dark' %} bg-zinc-800 hover:bg-zinc-700 drop-shadow-sm {% else %} bg-slate-200 hover:bg-slate-400 drop-shadow-sm {% endif %} rounded-md hover:rounded-lg">
             <div class="flex h-full font-semibold hover:font-bold">
-                <div class="m-auto text-2xl min-[680px]:text-3xl p-8">Checkout parts.</div>
+                <div class="m-auto text-2xl min-[680px]:text-3xl p-8">Checkout inventory.</div>
             </div>
         </a>
     </div>
@@ -39,12 +38,12 @@
 
 <div class="w-10/12 2xl:w-4/6 mx-auto min-[680px]:py-4">
     <div class="block w-full min-[680px]:flex min-[680px]:flex-row min-[680px]:space-x-6 2xl:space-x-14">
-        <a href="{% url 'inventory:create' %}" class="block basis-1/4 h-40 my-8 min-[680px]:my-0 lg:h-60 2xl:h-80 {% if theme.mode == 'Dark' %} bg-zinc-800 hover:bg-zinc-700 drop-shadow-sm {% else %} bg-slate-200 hover:bg-slate-400 drop-shadow-sm {% endif %} rounded-md hover:rounded-lg">
+        <a href="{% url 'parts:add' %}" class="block basis-1/4 h-40 my-8 min-[680px]:my-0 lg:h-60 2xl:h-80 {% if theme.mode == 'Dark' %} bg-zinc-800 hover:bg-zinc-700 drop-shadow-sm {% else %} bg-slate-200 hover:bg-slate-400 drop-shadow-sm {% endif %} rounded-md hover:rounded-lg">
             <div class="flex h-full font-semibold hover:font-bold">
                 <div class="m-auto text-2xl min-[680px]:text-3xl p-8">Create part.</div>
             </div>
         </a>
-        <a href="{% url 'inventory:editpart' %}" class="block basis-1/4 h-40 my-8 min-[680px]:my-0 lg:h-60 2xl:h-80 {% if theme.mode == 'Dark' %} bg-zinc-800 hover:bg-zinc-700 drop-shadow-sm {% else %} bg-slate-200 hover:bg-slate-400 drop-shadow-sm {% endif %} rounded-md hover:rounded-lg">
+        <a href="{% url 'parts:edit' %}" class="block basis-1/4 h-40 my-8 min-[680px]:my-0 lg:h-60 2xl:h-80 {% if theme.mode == 'Dark' %} bg-zinc-800 hover:bg-zinc-700 drop-shadow-sm {% else %} bg-slate-200 hover:bg-slate-400 drop-shadow-sm {% endif %} rounded-md hover:rounded-lg">
             <div class="flex h-full font-semibold hover:font-bold">
                 <div class="m-auto text-2xl min-[680px]:text-3xl p-8">Edit parts.</div>
             </div>

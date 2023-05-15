@@ -16,7 +16,7 @@
 </div>
 <div class="max-w-md mx-auto py-8 px-6 box-border">
     <div class=" {% if theme.mode == 'Light' %} bg-slate-200 {% else %} bg-zinc-800 {% endif %} rounded-lg">
-        <form action="{% url 'inventory:create' %}" method="post" class="p-16 mx-auto">
+        <form action="{% url 'parts:add' %}" method="post" class="p-16 mx-auto">
             {% csrf_token %}
             <div class="mb-4">
                 <label for="part" class="block font-bold text-sm mb-2 ">Part</label>

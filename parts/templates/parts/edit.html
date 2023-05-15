@@ -1,0 +1,123 @@
+{% extends 'core/base.html' %}
+{% block title %}Edit Part{% endblock %}
+{% block background %}{{ theme.body }}{% endblock %}
+{% block nav %}{{ theme.nav }}{% endblock %}
+{% block hover1 %}{{ theme.hover }}{% endblock %}
+{% block hover2 %}{{ theme.hover }}{% endblock %}
+{% block hover3 %}{{ theme.hover }}{% endblock %}
+{% block hover4 %}{{ theme.hover }}{% endblock %}
+{% block hover5 %}{{ theme.hover }}{% endblock %}
+{% block hover6 %}{{ theme.hover }}{% endblock %}
+{% block hover7 %}{{ theme.hover }}{% endblock %}
+{% block body %}
+<div class="mx-auto py-12 {% if theme.mode == 'Light' %} bg-violet-300 {% else %} bg-zinc-600 {% endif %}">
+    <div class="text-4xl text-center font-bold py-2">Edit an item.</div>
+    <p class="text-center text-sm py-2">Change information about a part.</p>
+    <p class="text-center text-sm py-2">Part Name - Category - Price - are all able to change.</p>
+</div>
+
+<div class="min-[1040px]:container mx-auto my-8">
+    <form action="{% url 'inventory:edit' %}" method="post" class="text-center">
+        {% csrf_token %}
+        <input type="text" name="part_name" placeholder="Search for part" autofocus autocomplete="off" class="w-1/2 md:w-7/12 lg:w-10/12 py-2 px-4 rounded text-black">
+        <button type="submit" name="search" class="shadow bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 focus:shadow-outline focus:outline-none text-white py-2 px-4 rounded transition ease-in-out delay-150">Search</button>
+        {% if search %}
+        <div>
+            <p class="text-rose-600 text-sm text-center font-bold mt-4" type="submit">{{ search }}</p>
+        </div>
+        {% endif %}
+    </form>
+</div>
+
+{% if parts %}
+<div class="min-[1040px]:container mx-auto my-8 lg:rounded-lg overflow-hidden {% if theme.mode == 'Light' %} bg-slate-400 {% else %} bg-zinc-800 {% endif %}">
+    <table class="w-full">
+        <thead class="text-sm uppercase m-auto {% if theme.mode == 'Light' %} bg-slate-400 {% else %} bg-zinc-600 {% endif %} ">
+            <tr>
+                <td class="px-6 py-3 text-center">Part name</td>
+                <td class="px-6 py-3 text-center">Category</td>
+                <td class="px-6 py-3 text-center">Price</td>
+                <td class="px-6 py-3 text-center">User</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for part in parts %}
+            <tr>
+                <td class="px-6 py-3 text-center">{{ part.partname }}</td>
+                <td class="px-6 py-3 text-center">{{ part.category }}</td>
+                <td class="px-6 py-3 text-center">{{ part.usd }}</td>
+                <td class="px-6 py-3 text-center">{{ part.user }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+</div>
+{% endif %}
+
+<div class="w-full min-[1040px]:container min-[320px] min-[1040px]:flex mx-auto sm:overflow-hidden sm:rounded-md {% if theme.mode == 'Light' %} min-[1040px]:bg-slate-200 {% else %} min-[1040px]:bg-zinc-600 {% endif %}">
+    <div class="flex justify-center mx-auto md:w-1/2 {% if theme.mode == 'Light' %} bg-slate-400 {% else %} bg-zinc-800 {% endif %}">
+        <form action="{% url 'inventory:edit' %}" method="post" class="p-16 mx-auto">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="part" class="block font-bold mb-2 ">Part you want to change</label>
+                <input type="text" placeholder="Part" autcomplete="off" name="part" class="text-xl py-2 px-3 text-gray-700 w-full shadow appearance-none border leading-tight rounded focus:outline-none">
+            </div>
+
+            <div class="mb-4">
+                <label for="part" class="block font-bold mb-2 ">New Name</label>
+                <input type="text" placeholder="Change name" autcomplete="off" name="name" class="text-xl py-2 px-3 text-gray-700 w-full shadow appearance-none border leading-tight rounded focus:outline-none">
+            </div>
+
+            <div class="mb-4">
+                <label for="part" class="block font-bold mb-2 ">Category</label>
+                <input type="text" placeholder="Change category" autcomplete="off" name="category" class="text-xl py-2 px-3 text-gray-700 w-full shadow appearance-none border leading-tight rounded focus:outline-none">
+            </div>
+
+            <div class="mb-4">
+                <label for="part" class="block font-bold mb-2 ">Price</label>
+                <input type="text" placeholder="Change price" autcomplete="off" name="price" class="text-xl py-2 px-3 text-gray-700 w-full shadow appearance-none border leading-tight rounded focus:outline-none">
+            </div>
+            
+            <div class="py-3">
+                <button type="submit" name="edit" class="shadow bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 focus:shadow-outline focus:outline-none text-white font-bold py-4 px-6 rounded transition ease-in-out delay-150">Submit</button>
+            </div>
+
+            {% if fail %}
+            <div class="block">
+                <p class="text-rose-600 text-sm text-center sm:text-left font-bold mt-4" type="submit">{{ fail }}</p>
+            </div>
+            {% elif success %}
+            <div class="block">
+                <p class="text-emerald-500 text-sm text-center sm:text-left font-bold mt-4" type="submit">{{ success }}</p>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+    <div class="w-10/12 min-[1040px]:w-1/2 m-auto">
+        <div class="text-2xl md:text-3xl min-[1040px]:text-4xl font-bold text-center">
+           Or <a href="{% url 'inventory:edit' %}" class="text-rose-500 hover:text-rose-800 transition ease-in-out">edit inventory.</a>
+        </div>
+    </div>
+</div>
+
+<div class="container mx-auto py-8 sm:py-16">
+    <div class="block text-4xl text-center font-bold py-2">Some other options:</div>
+</div>
+
+<div class="w-full min-[1040px]:container mx-auto sm:pt-12 min-[680px]:py-4">
+    <div class="block w-full min-[680px]:flex min-[680px]:flex-row min-[680px]:space-x-6 2xl:space-x-14">
+        <a href="{% url 'inventory:edit' %}" class="block basis-1/2 h-40 my-8 min-[680px]:my-0 lg:h-60 2xl:h-80 {% if theme.mode == 'Dark' %} bg-zinc-800 hover:bg-zinc-700 drop-shadow-sm {% else %} bg-slate-200 hover:bg-slate-400 drop-shadow-sm {% endif %} rounded-md hover:rounded-lg">
+            <div class="flex h-full">
+                <div class="m-auto capitalize text-2xl min-[680px]:text-3xl font-semibold p-8">Edit inventory.</div>
+            </div>
+        </a>
+        
+        <a href="{% url 'inventory:index' %}" class="block basis-1/2 h-40 my-8 min-[680px]:my-0 lg:h-60 2xl:h-80 {% if theme.mode == 'Dark' %} bg-zinc-800 hover:bg-zinc-700 drop-shadow-sm {% else %} bg-slate-200 hover:bg-slate-400 drop-shadow-sm {% endif %} rounded-md hover:rounded-lg">
+            <div class="flex h-full">
+                <div class="m-auto capitalize text-2xl min-[680px]:text-3xl font-semibold p-8">Check inventory.</div>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock %}

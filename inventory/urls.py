@@ -5,10 +5,8 @@ app_name = 'inventory'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('create', views.new, name='create'),
     path('add', views.add, name='add'),
     path('logs', views.logs, name='logs'),
     path('checkout', views.checkout, name='checkout'),
-    path('editpart', views.editpart, name='editpart'),
-    path('editinventory', views.editinventory, name='editinventory')
+    path('edit', views.edit, name='edit'),
 ]
