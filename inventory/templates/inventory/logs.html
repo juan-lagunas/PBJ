@@ -23,7 +23,7 @@
         <a href="{% url 'inventory:create' %}" class="block py-20 text-3xl text-center sm:text-base m-auto mt-6 sm:p-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
             Create
         </a>
-        <a href="{% url 'inventory:edit' %}" class="block py-20 text-3xl text-center sm:text-base m-auto mt-6 sm:p-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
+        <a href="{% url 'inventory:editpart' %}" class="block py-20 text-3xl text-center sm:text-base m-auto mt-6 sm:p-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
             Edit
         </a>
         <a href="{% url 'inventory:index' %}" class="block py-20 text-3xl text-center sm:text-base m-auto mt-6 mb-10 sm:mb-0 sm:p-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
@@ -38,57 +38,57 @@
                 <table class="w-full text-sm text-left">
                     <thead class="text-xs uppercase m-auto{% if theme.mode == 'Light' %} bg-slate-400 {% else %} bg-zinc-700 {% endif %} ">
                         <tr class="">
-                            <th scope="col" class="px-6 py-3 text-center">Product name</th>
-                            <th scope="col" class="px-6 py-3 text-center">Category</th>
-                            <th scope="col" class="px-6 py-3 text-center">Quantity</th>
-                            <th scope="col" class="px-6 py-3 text-center">Price</th>
-                            <th scope="col" class="px-6 py-3 text-center">User</th>
-                            <th scope="col" class="px-6 py-3 text-center">Date</th>
+                            <td scope="col" class="px-6 py-3 text-center">Product name</td>
+                            <td scope="col" class="px-6 py-3 text-center">Category</td>
+                            <td scope="col" class="px-6 py-3 text-center">Quantity</td>
+                            <td scope="col" class="px-6 py-3 text-center">Price</td>
+                            <td scope="col" class="px-6 py-3 text-center">User</td>
+                            <td scope="col" class="px-6 py-3 text-center">Date</td>
                         </tr>
                     </thead>
 
                     <tbody>
                         {% for log in logs %}
                         <tr class="">
-                            <th scope="col" class="px-6 py-3 text-center">{{ log.partname }}</th>
-                            <th scope="col" class="px-6 py-3 text-center">{{ log.category }}</th>
-                            <th scope="col" class="px-6 py-3 text-center">{{ log.quantity }}</th>
-                            <th scope="col" class="px-6 py-3 text-center">{{ log.total }}</th>
-                            <th scope="col" class="px-6 py-3 text-center">{{ log.user }}</th>
-                            <th scope="col" class="px-6 py-3 text-center">{{ log.date }}</th>
+                            <td scope="col" class="px-6 py-3 text-center">{{ log.partname }}</td>
+                            <td scope="col" class="px-6 py-3 text-center">{{ log.category }}</td>
+                            <td scope="col" class="px-6 py-3 text-center">{{ log.quantity }}</td>
+                            <td scope="col" class="px-6 py-3 text-center">{{ log.total }}</td>
+                            <td scope="col" class="px-6 py-3 text-center">{{ log.user }}</td>
+                            <td scope="col" class="px-6 py-3 text-center">{{ log.date }}</td>
                         </tr>
                         {% endfor %}
                         <tr class="">
-                            <th scope="col" class="px-6 py-3 text-center">Product name</th>
-                            <th scope="col" class="px-6 py-3 text-center">Category</th>
-                            <th scope="col" class="px-6 py-3 text-center">Quantity</th>
-                            <th scope="col" class="px-6 py-3 text-center">Price</th>
-                            <th scope="col" class="px-6 py-3 text-center">Total</th>
-                            <th scope="col" class="px-6 py-3 text-center">Total</th>
+                            <td scope="col" class="px-6 py-3 text-center">Product name</td>
+                            <td scope="col" class="px-6 py-3 text-center">Category</td>
+                            <td scope="col" class="px-6 py-3 text-center">Quantity</td>
+                            <td scope="col" class="px-6 py-3 text-center">Price</td>
+                            <td scope="col" class="px-6 py-3 text-center">Total</td>
+                            <td scope="col" class="px-6 py-3 text-center">Total</td>
                         </tr>
                         <tr class="">
-                            <th scope="col" class="px-6 py-3 text-center">Product name</th>
-                            <th scope="col" class="px-6 py-3 text-center">Category</th>
-                            <th scope="col" class="px-6 py-3 text-center">Quantity</th>
-                            <th scope="col" class="px-6 py-3 text-center">Price</th>
-                            <th scope="col" class="px-6 py-3 text-center">Total</th>
-                            <th scope="col" class="px-6 py-3 text-center">Total</th>
+                            <td scope="col" class="px-6 py-3 text-center">Product name</td>
+                            <td scope="col" class="px-6 py-3 text-center">Category</td>
+                            <td scope="col" class="px-6 py-3 text-center">Quantity</td>
+                            <td scope="col" class="px-6 py-3 text-center">Price</td>
+                            <td scope="col" class="px-6 py-3 text-center">Total</td>
+                            <td scope="col" class="px-6 py-3 text-center">Total</td>
                         </tr>
                         <tr class="">
-                            <th scope="col" class="px-6 py-3 text-center">Product name</th>
-                            <th scope="col" class="px-6 py-3 text-center">Category</th>
-                            <th scope="col" class="px-6 py-3 text-center">Quantity</th>
-                            <th scope="col" class="px-6 py-3 text-center">Price</th>
-                            <th scope="col" class="px-6 py-3 text-center">Total</th>
-                            <th scope="col" class="px-6 py-3 text-center">Total</th>
+                            <td scope="col" class="px-6 py-3 text-center">Product name</td>
+                            <td scope="col" class="px-6 py-3 text-center">Category</td>
+                            <td scope="col" class="px-6 py-3 text-center">Quantity</td>
+                            <td scope="col" class="px-6 py-3 text-center">Price</td>
+                            <td scope="col" class="px-6 py-3 text-center">Total</td>
+                            <td scope="col" class="px-6 py-3 text-center">Total</td>
                         </tr>
                         <tr class="">
-                            <th scope="col" class="px-6 py-3 text-center">Product name</th>
-                            <th scope="col" class="px-6 py-3 text-center">Category</th>
-                            <th scope="col" class="px-6 py-3 text-center">Quantity</th>
-                            <th scope="col" class="px-6 py-3 text-center">Price</th>
-                            <th scope="col" class="px-6 py-3 text-center">Total</th>
-                            <th scope="col" class="px-6 py-3 text-center">Total</th>
+                            <td scope="col" class="px-6 py-3 text-center">Product name</td>
+                            <td scope="col" class="px-6 py-3 text-center">Category</td>
+                            <td scope="col" class="px-6 py-3 text-center">Quantity</td>
+                            <td scope="col" class="px-6 py-3 text-center">Price</td>
+                            <td scope="col" class="px-6 py-3 text-center">Total</td>
+                            <td scope="col" class="px-6 py-3 text-center">Total</td>
                         </tr>
                     </tbody>
                 </table>

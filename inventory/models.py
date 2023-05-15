@@ -16,8 +16,12 @@ class Part(models.Model):
     user = models.CharField(max_length=40)
     date = models.DateField()
 
+    @property
+    def usd(self):
+        return f'${self.price:,.2f}'
+
     def __str__(self):
-        return f'{self.partname} ({self.category}) - {self.description} : ${self.price}'
+        return f'{self.partname} ({self.category}) - {self.description} : ${self.usd}'
     
 
 class Inventory(models.Model):

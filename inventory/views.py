@@ -221,30 +221,118 @@ def checkout(request):
         return render(request, 'inventory/checkout.html', {
             'theme': theme,
         })
-    
+        
 
 @login_required
-def edit(request):
-    theme = DarkMode.objects.get(user=request.user.username)
-    if request.method == 'POST':
-        old_name = request.POST['oldname']
-        new_name = request.Post['newname']
-        new_category = request.POST['category']
+def editpart(request):
+    theme = DarkMode.objects.filter(user=request.user.username)[0]
+    if request.method == 'POST' and 'search' in request.POST:      
+        part_name = request.POST['part_name'].title()
+        if not part_name:
+            return render(request, 'inventory/editpart.html', {
+                'theme': theme,
+                'search': 'Could not find part.'
+            })
+        
+    
+        parts = Part.objects.filter(partname__contains=part_name)
+        if not parts:
+            return render(request, 'inventory/editpart.html', {
+                'theme': theme,
+                'search': 'Part not found.'
+            })
+
+        return render(request, 'inventory/editpart.html', {
+                'theme': theme,
+                'parts': parts
+            })
+        
+    if request.method == 'POST' and 'edit' in request.POST:
         try:
-            new_price = float(request.POST['price'])
+            part = request.POST['part'].title()
+            name = request.POST['name'].title()
+            category = request.POST['category'].title()
+            price = float(request.POST['price'])
+            if not part or not name or not category or not price:
+                return render(request, 'inventory/editpart.html', {
+                    'theme': theme,
+                    'fail': 'Need to fill out everything.'
+                })
         except ValueError:
-           return render(request, 'inventory/checkout.html', {
+            return render(request, 'inventory/editpart.html', {
                 'theme': theme,
                 'fail': 'Failed to input valid price.'
-            }) 
+            })
         
-        if not old_name or not new_name or not new_category or not new_price:
-            return render(request, 'inventory/checkout.html', {
+        try:
+            part_data = Part.objects.get(partname=part)
+        
+        except:
+            return render(request, 'inventory/editpart.html', {
                 'theme': theme,
-                'fail': 'Need to fill out everything.'
-            }) 
+                'fail': 'Part not found.'
+            })
+            
 
+   
     else:
-        return render(request, 'inventory/edit.html', {
+        return render(request, 'inventory/editpart.html', {
+            'theme': theme
+        })
+    
+@login_required
+def editinventory(request):
+    theme = DarkMode.objects.filter(user=request.user.username)[0]
+    if request.method == 'POST' and 'search' in request.POST:      
+        part_name = request.POST['part_name'].title()
+        if not part_name:
+            return render(request, 'inventory/editpart.html', {
+                'theme': theme,
+                'search': 'Could not find part.'
+            })
+        
+    
+        parts = Part.objects.filter(partname__contains=part_name)
+        if not parts:
+            return render(request, 'inventory/editpart.html', {
+                'theme': theme,
+                'search': 'Part not found.'
+            })
+
+        return render(request, 'inventory/editpart.html', {
+                'theme': theme,
+                'parts': parts
+            })
+        
+    if request.method == 'POST' and 'edit' in request.POST:
+        try:
+            part = request.POST['part'].title()
+            name = request.POST['name'].title()
+            category = request.POST['category'].title()
+            price = float(request.POST['price'])
+            if not part or not name or not category or not price:
+                return render(request, 'inventory/editpart.html', {
+                    'theme': theme,
+                    'fail': 'Need to fill out everything.'
+                })
+        except ValueError:
+            return render(request, 'inventory/editpart.html', {
+                'theme': theme,
+                'fail': 'Failed to input valid price.'
+            })
+        
+        try:
+            part_data = Part.objects.get(partname=part)
+        
+        except:
+            return render(request, 'inventory/editpart.html', {
+                'theme': theme,
+                'fail': 'Part not found.'
+            })
+            
+
+   
+    else:
+        return render(request, 'inventory/editpart.html', {
             'theme': theme
         })

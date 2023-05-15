@@ -12,18 +12,19 @@ import datetime
 def index(request):
     today = datetime.date.today()
     # If user has a theme load theme else create default theme
-    try:
-        theme = DarkMode.objects.get(user=request.user.username)
+    theme = DarkMode.objects.filter(user=request.user.username)[0]
+    if not theme:
+        theme = DarkMode.objects.create(user=request.user.username)
         return render(request, 'core/index.html', {
             'theme': theme,
             'date': today
         })
-    except:
-        theme = DarkMode.objects.create(user = request.user.username)
-        return render(request, 'core/index.html', {
-            'theme': theme,
-            'date': today
-        })
+    
+    return render(request, 'core/index.html', {
+        'theme': theme,
+        'date': today
+    })
+    
     # Else display user home page
     
     
