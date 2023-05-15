@@ -9,7 +9,7 @@ from .models import Category, Part, Inventory, Log
 # Inventory home
 @login_required
 def index(request):
-    inventory = Inventory.objects.all()[:15]
+    inventory = Inventory.objects.all()[:20]
     theme = DarkMode.objects.filter(user=request.user.username)[0]
     total = 0
     for part in inventory:
@@ -67,7 +67,7 @@ def new(request):
         else:      
             if partdata.exists():
                 return render(request, 'inventory/create.html', {
-                    'fail': 'Part already exists but new category has been created.',
+                    'fail': 'Category has been created, but part already exists..',
                     'theme': theme
                 })
             else:
@@ -82,7 +82,7 @@ def new(request):
                 )
 
         return render(request, 'inventory/create.html', {
-            'success': 'Part information has been stored!',
+            'success': 'Part information saved!',
             'theme': theme
         })
     
@@ -102,14 +102,14 @@ def add(request):
         except ValueError:
             return render(request, 'inventory/add.html', {
                 'theme': theme,
-                'fail': 'Quantity needs to be a whole number.'
+                'fail': 'Quantity has to be a whole number.'
             })
         part = request.POST['part'].title()
 
         if not part or not quantity:
             return render(request, 'inventory/add.html', {
                 'theme': theme,
-                'fail': 'Need to fill out form.'
+                'fail': 'Need to fill out both parts.'
             })
         
         try:
@@ -146,7 +146,7 @@ def add(request):
         )
 
         return render(request, 'inventory/add.html', {
-            'success': 'Inventory has been updated!',
+            'success': 'Updated inventory!',
             'theme': theme
         })
         
@@ -158,7 +158,7 @@ def add(request):
 
 @login_required
 def logs(request):
-    logs = Log.objects.all().order_by('-date')[:10]
+    logs = Log.objects.all().order_by('-date')[:15]
     theme = DarkMode.objects.filter(user=request.user.username)[0]
     return render(request, 'inventory/logs.html', {
         'theme': theme,
@@ -168,6 +168,83 @@ def logs(request):
 @login_required
 def checkout(request):
     theme = DarkMode.objects.filter(user=request.user.username)[0]
-    return render(request, 'inventory/checkout.html', {
-        'theme': theme
-    })
+    if request.method == 'POST':
+        part = request.POST['part'].title()
+        try:
+            quantity = int(request.POST['quantity'])
+        except ValueError:
+            return render(request, 'inventory/checkout.html', {
+                'theme': theme,
+                'fail': 'Quantity has to be whole number.'
+            })
+        
+        if not part or not quantity:
+            return render(request, 'inventory/checkout.html', {
+                'theme': theme,
+                'fail': 'Need to fill out both parts.'
+            })
+        
+        try:
+            data = Inventory.objects.get(partname=part)
+        except:
+            return render(request, 'inventory/checkout.html', {
+                'theme': theme,
+                'fail': 'Part not found'
+            })
+        
+        if quantity > data.quantity:
+            return render(request, 'inventory/checkout.html', {
+                'theme': theme,
+                'fail': 'Not enough in stock.'
+            })
+        
+        data.quantity -= quantity
+        data.save()
+        date = datetime.datetime.now()
+        user = request.user.username
+
+        Log.objects.create(
+            partname = data.partname,
+            category = data.category,
+            price = data.price,
+            quantity = -quantity,
+            user = user,
+            date = date,
+        )
+
+        return render(request, 'inventory/checkout.html', {
+            'theme': theme,
+            'success': 'Checkout complete.'
+        })
+    
+    else:
+        return render(request, 'inventory/checkout.html', {
+            'theme': theme,
+        })
+    
+
+@login_required
+def edit(request):
+    theme = DarkMode.objects.get(user=request.user.username)
+    if request.method == 'POST':
+        old_name = request.POST['oldname']
+        new_name = request.Post['newname']
+        new_category = request.POST['category']
+        try:
+            new_price = float(request.POST['price'])
+        except ValueError:
+           return render(request, 'inventory/checkout.html', {
+                'theme': theme,
+                'fail': 'Failed to input valid price.'
+            }) 
+        
+        if not old_name or not new_name or not new_category or not new_price:
+            return render(request, 'inventory/checkout.html', {
+                'theme': theme,
+                'fail': 'Need to fill out everything.'
+            }) 
+
+    else:
+        return render(request, 'inventory/edit.html', {
+            'theme': theme
+        })

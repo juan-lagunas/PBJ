@@ -1,0 +1,73 @@
+{% extends 'core/base.html' %}
+{% block title %}Edit Item{% endblock %}
+{% block background %}{{ theme.body }}{% endblock %}
+{% block nav %}{{ theme.nav }}{% endblock %}
+{% block hover1 %}{{ theme.hover }}{% endblock %}
+{% block hover2 %}{{ theme.hover }}{% endblock %}
+{% block hover3 %}{{ theme.hover }}{% endblock %}
+{% block hover4 %}{{ theme.hover }}{% endblock %}
+{% block hover5 %}{{ theme.hover }}{% endblock %}
+{% block hover6 %}{{ theme.hover }}{% endblock %}
+{% block hover7 %}{{ theme.hover }}{% endblock %}
+{% block body %}
+<div class="mx-auto py-12 {% if theme.mode == 'Light' %} bg-violet-300 {% else %} bg-zinc-600 {% endif %}">
+    <div class="text-4xl text-center font-bold py-2">Edit an item.</div>
+    <p class="text-center text-sm py-2">Change information about a part.</p>
+    <p class="text-center text-sm py-2">Part Name - Category - Price - are all available to change.</p>
+</div>
+
+<div class="w-full min-[1040px]:container min-[320px] min-[1040px]:flex sm:my-16 mx-auto sm:overflow-hidden sm:rounded-md {% if theme.mode == 'Light' %} min-[1040px]:bg-slate-200 {% else %} bg-zinc-600 {% endif %}">
+    <div class="flex justify-center mx-auto sm:w-1/2 {% if theme.mode == 'Light' %} bg-slate-400 {% else %} bg-zinc-800 {% endif %}">
+        <form action="" class="p-16 mx-auto">
+            <div class="mb-4">
+                <label for="part" class="block font-bold mb-2 ">Old Name</label>
+                <input type="text" placeholder="Old name" autcomplete="off" name="oldname" class="text-xl py-2 px-3 text-gray-700 w-full shadow appearance-none border leading-tight rounded focus:outline-none">
+            </div>
+
+            <div class="mb-4">
+                <label for="part" class="block font-bold mb-2 ">New Name</label>
+                <input type="text" placeholder="New name" autcomplete="off" name="newname" class="text-xl py-2 px-3 text-gray-700 w-full shadow appearance-none border leading-tight rounded focus:outline-none">
+            </div>
+
+            <div class="mb-4">
+                <label for="part" class="block font-bold mb-2 ">Category</label>
+                <input type="text" placeholder="New category" autcomplete="off" name="category" class="text-xl py-2 px-3 text-gray-700 w-full shadow appearance-none border leading-tight rounded focus:outline-none">
+            </div>
+
+            <div class="mb-4">
+                <label for="part" class="block font-bold mb-2 ">Price</label>
+                <input type="text" placeholder="New price" autcomplete="off" name="price" class="text-xl py-2 px-3 text-gray-700 w-full shadow appearance-none border leading-tight rounded focus:outline-none">
+            </div>
+            
+            <div class="py-3">
+                <button type="submit" class="shadow bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 focus:shadow-outline focus:outline-none text-white font-bold py-4 px-6 rounded transition ease-in-out delay-150">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="w-10/12 m-auto py-16 sm:w-1/2 md:py-20 lg:flex">
+        <div class="text-2xl md:text-3xl min-[1040px]:text-5xl min-[1040px]:text-center leading-relaxed font-bold">
+            Want to edit part inventory instead? <a href="/" class="hover:text-rose-700 transition ease-in-out"> Click here.</a>
+        </div>
+    </div>
+</div>
+
+<div class="max-sm:w-10/12 w-3/4 mx-auto py-8 sm:py-16">
+    <div class="block text-4xl text-center font-bold py-2">Some other options:</div>
+</div>
+
+<div class="w-full min-[1040px]:container mx-auto sm:pt-12 min-[680px]:py-4">
+    <div class="block w-full min-[680px]:flex min-[680px]:flex-row min-[680px]:space-x-6 2xl:space-x-14">
+        <a href="{% url 'inventory:create' %}" class="block basis-1/2 h-40 my-8 min-[680px]:my-0 lg:h-60 2xl:h-80 {% if theme.mode == 'Dark' %} bg-zinc-800 hover:bg-zinc-700 drop-shadow-sm {% else %} bg-slate-200 hover:bg-slate-400 drop-shadow-sm {% endif %} rounded-md hover:rounded-lg">
+            <div class="flex h-full">
+                <div class="m-auto text-2xl min-[680px]:text-3xl font-semibold p-8">Edit inventory.</div>
+            </div>
+        </a>
+        
+        <a href="{% url 'inventory:index' %}" class="block basis-1/2 h-40 my-8 min-[680px]:my-0 lg:h-60 2xl:h-80 {% if theme.mode == 'Dark' %} bg-zinc-800 hover:bg-zinc-700 drop-shadow-sm {% else %} bg-slate-200 hover:bg-slate-400 drop-shadow-sm {% endif %} rounded-md hover:rounded-lg">
+            <div class="flex h-full">
+                <div class="m-auto text-2xl min-[680px]:text-3xl font-semibold p-8">Check inventory.</div>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock %}

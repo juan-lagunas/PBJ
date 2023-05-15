@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="min-h-screen p-0 m-0 {% block background %}{% endblock %}">
+<body class="min-h-screen p-0 m-0 font-mono {% block background %}{% endblock %}">
     {% if user.is_authenticated %}
     <header class="{% block nav %}{% endblock %} py-6 px-6">
         <div class="flex flex-row">
@@ -17,17 +17,17 @@
                 <a href="/" class="text-xl font-semibold ml-3 mt-2 justify-start">PBJ</a>
             </div>
             
-            <div class="basis-3/4 min-[880px]:basis-1/2">
-                <div class="lg:space-x-6 flex justify-end min-[880px]:justify-center">
-                    <a href="{% url 'inventory:create' %}" class="rounded-lg px-3 py-2 font-semibold {% block hover3 %}{% endblock %} transition ease-in-out">Create</a>
-                    <a href="{% url 'inventory:add' %}" class="hidden min-[780px]:inline-flex rounded-lg px-3 py-2 font-semibold {% block hover4 %}{% endblock %} transition ease-in-out">Add</a>
+            <div class="basis-3/4 min-[1200px]:basis-1/2">
+                <div class="lg:space-x-6 flex justify-end min-[1200px]:justify-center">
+                    <a href="{% url 'inventory:add' %}" class="rounded-lg px-3 py-2 font-semibold {% block hover3 %}{% endblock %} transition ease-in-out">Add</a>
+                    <a href="{% url 'inventory:edit' %}" class="hidden min-[780px]:inline-flex rounded-lg px-3 py-2 font-semibold {% block hover4 %}{% endblock %} transition ease-in-out">Edit</a>
                     <a href="{% url 'inventory:checkout' %}" class="hidden min-[780px]:inline-flex rounded-lg px-3 py-2 font-semibold {% block hover5 %}{% endblock %} transition ease-in-out">Checkout</a>
                     <a href="{% url 'inventory:index' %}" class="hidden min-[780px]:inline-flex rounded-lg px-3 py-2 font-semibold {% block hover7 %}{% endblock %} transition ease-in-out">Inventory</a>
                     <a href="{% url 'core:signout' %}" class="rounded-lg px-3 py-2 font-semibold {% block hover6 %}{% endblock %} transition ease-in-out">Sign Out</a>
                 </div>
             </div>
 
-            <div class="hidden basis-1/4 justify-end min-[880px]:inline-flex min-[880px]:justify-end">
+            <div class="hidden justify-end min-[1200px]:basis-1/4 min-[1200px]:flex min-[1200px]:justify-end">
                 <div class="lg:space-x-6 flex  ">
                     <a href="/theme?mode=Dark" class=" rounded-lg px-3 py-2 font-light {% block hover1 %}{% endblock %} transition ease-in-out">Dark Mode</a>
                     <a href="/theme?mode=Light" class=" rounded-lg px-3 py-2 font-light {% block hover2 %}{% endblock %} transition ease-in-out">Light Mode</a>

@@ -17,7 +17,7 @@
 
 <div class="max-w-md mx-auto py-8 px-6 box-border">
     <div class=" {% if theme.mode == 'Light' %} bg-slate-200 {% else %} bg-zinc-800 {% endif %} rounded-lg">
-        <form action="{% url 'inventory:add'%}" method="post" class="p-16 mx-auto">
+        <form action="{% url 'inventory:checkout'%}" method="post" class="p-16 mx-auto">
             {% csrf_token %}
             <div class="mb-4">
                 <label for="part" class="block font-bold text-sm mb-2 ">Part</label>
@@ -34,11 +34,11 @@
             </div>
             {% if fail %}
             <div class="block">
-                <p class="text-rose-600 text-sm font-bold mt-4" type="submit">{{ fail }}</p>
+                <p class="text-rose-600 text-sm text-center font-bold mt-4" type="submit">{{ fail }}</p>
             </div>
             {% elif success %}
             <div class="block">
-                <p class="text-emerald-500 text-sm font-bold mt-4" type="submit">{{ success }}</p>
+                <p class="text-emerald-500 text-sm text-center font-bold mt-4" type="submit">{{ success }}</p>
             </div>
             {% endif %}
         </form>

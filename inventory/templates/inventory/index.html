@@ -23,7 +23,7 @@
         <a href="{% url 'inventory:create' %}" class="block py-20 text-3xl text-center sm:text-base m-auto mt-6 sm:p-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
             Create
         </a>
-        <a href="/" class="block py-20 text-3xl text-center sm:text-base m-auto mt-6 sm:p-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
+        <a href="{% url 'inventory:edit' %}" class="block py-20 text-3xl text-center sm:text-base m-auto mt-6 sm:p-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
             Edit
         </a>
         <a href="{% url 'inventory:logs' %}" class="block py-20 text-3xl text-center sm:text-base m-auto mt-6 mb-10 sm:mb-0 sm:p-4 sm:m-0 w-full font-semibold rounded-md shadow-md {% if theme.mode == 'Light' %} bg-slate-400 hover:bg-slate-200 {% else %} bg-zinc-700 hover:bg-zinc-400 {% endif %} transition ease-in-out">
