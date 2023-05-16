@@ -10,9 +10,33 @@ from core.models import DarkMode
 
 @login_required
 def index(request):
+    part_count = Part.objects.count()
+    category_count = Category.objects.count()
     theme = DarkMode.objects.filter(user=request.user.username)[0]
+    if request.method == 'POST':      
+        part_name = request.POST['part_name'].title()
+        if not part_name:
+            return render(request, 'parts/index.html', {
+                'theme': theme,
+                'search': 'Could not find part.'
+            })
+        
+        parts = Part.objects.filter(partname__contains=part_name)
+        if not parts:
+            return render(request, 'parts/index.html', {
+                'theme': theme,
+                'search': 'Part not found.'
+            })
+
+        return render(request, 'parts/index.html', {
+                'theme': theme,
+                'parts': parts
+            })
+    
     return render(request, 'parts/index.html', {
-        'theme': theme
+        'theme': theme,
+        'part_count': part_count,
+        'category_count': category_count
     })
 
 # Create new part

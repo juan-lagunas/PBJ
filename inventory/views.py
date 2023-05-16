@@ -6,24 +6,116 @@ import datetime
 from .models import Inventory, Log
 from parts.models import Part, Category
 from core.models import DarkMode
-
+from django.db.models import Sum
+import math
 
 # Inventory home
 @login_required
 def index(request):
-    inventory = Inventory.objects.all()[:20]
     theme = DarkMode.objects.filter(user=request.user.username)[0]
+    inventory = Inventory.objects.all()[:20]
     total = 0
     for part in inventory:
         total += part.price * part.quantity
-    
+
     return render(request, 'inventory/index.html', {
         'theme': theme,
         'inventory': inventory,
         'total': f'${total:,.2f}' 
     })
 
-# Add quantity to existing part
+
+# Display inventory
+@login_required
+def stock(request):
+    theme = DarkMode.objects.filter(user=request.user.username)[0]
+    inventory = Inventory.objects.all().order_by('-quantity')[:10]
+    part_count = Inventory.objects.aggregate(Sum('quantity'))
+    total = 0
+    for part in inventory:
+        total += part.price * part.quantity
+
+    # Handles search
+    if request.method == 'POST' and 'search' in request.POST:
+        part = request.POST['part_name'].title()
+        if not part:
+            return render(request, 'inventory/stock.html', {
+                'theme': theme,
+                'inventory': inventory,
+                'part_count': part_count,
+                'total': f'${total:,.2f}',
+                'fail': 'Could not find part.'
+            })
+
+        try:
+            part_data = Inventory.objects.filter(partname__contains=part)
+        except:
+            return render(request, 'inventory/stock.html', {
+                'theme': theme,
+                'inventory': inventory,
+                'part_count': part_count,
+                'total': f'${total:,.2f}',
+                'fail': 'Could not find part.'
+            })
+
+        return render(request, 'inventory/stock.html', {
+            'theme': theme,
+            'inventory': part_data,
+            'part_count': part_count,
+            'total': f'${total:,.2f}',
+            'success': 'success'
+        })
+    
+    return render(request, 'inventory/stock.html', {
+        'theme': theme,
+        'inventory': inventory,
+        'part_count': part_count,
+        'total': f'${total:,.2f}'
+    })
+
+@login_required
+def page(request):
+    theme = DarkMode.objects.filter(user=request.user.username)[0]
+    parts = Inventory.objects.count()
+    pages = math.ceil(parts/10)
+    inventory = Inventory.objects.all()[:10]
+    if request.method == 'GET':
+        return render(request, 'inventory/page.html', {
+            'theme': theme,
+            'pages': range(1,pages+1),
+            'inventory': inventory
+        })
+    
+    if request.method == 'POST':
+        try:
+            page = int(request.POST['page'])
+        except ValueError:
+            return render(request, 'inventory/page.html', {
+                'fail': 'Page not founds',
+                'theme': theme,
+                'inventory': inventory,
+                'pages': range(1,pages+1),
+            })
+
+        if page > pages or page < 0:
+            return render(request, 'inventory/page.html', {
+                'fail': 'Page not found',
+                'theme': theme,
+                'inventory': inventory,
+                'pages': range(1,pages+1),
+            })
+        
+        inventory = Inventory.objects.all()[page*10-10:page*10]
+        return render(request, 'inventory/page.html', {
+            'theme': theme,
+            'pages': range(1,pages+1),
+            'inventory': inventory
+        })
+
+            
+
+
+# Add inventory
 @login_required
 def add(request):
     theme = DarkMode.objects.filter(user=request.user.username)[0]
@@ -87,7 +179,7 @@ def add(request):
         })
     
 
-# Get all logs info to display
+# Show logs
 @login_required
 def logs(request):
     logs = Log.objects.all().order_by('-date')[:15]
@@ -98,7 +190,7 @@ def logs(request):
 })
 
 
-# Checkout parts from inventory
+# Checkout parts
 @login_required
 def checkout(request):
     theme = DarkMode.objects.filter(user=request.user.username)[0]
@@ -182,7 +274,7 @@ def edit(request):
                 'parts': part_inventory
             })
 
-    # Handles changing inventory data    
+    # Handles changing info   
     if request.method == 'POST' and 'edit' in request.POST:
         try:
             part = request.POST['part'].title()

@@ -10,7 +10,7 @@ import datetime
 def index(request):
     today = datetime.date.today()
     # If user has a theme load theme else create default theme
-    theme = DarkMode.objects.filter(user=request.user.username)[0]
+    theme = DarkMode.objects.filter(user=request.user.username)
     if not theme:
         theme = DarkMode.objects.create(user=request.user.username)
         return render(request, 'core/index.html', {
@@ -19,12 +19,9 @@ def index(request):
         })
     
     return render(request, 'core/index.html', {
-        'theme': theme,
+        'theme': theme.first(),
         'date': today
     })
-    
-    # Else display user home page
-    
     
 
 def signin(request):
